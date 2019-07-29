@@ -1,5 +1,6 @@
 import requests
 import logging
+from lxml import html
 
 logging.basicConfig(level=logging.DEBUG)
 _logger = logging.getLogger(__name__)
@@ -26,7 +27,7 @@ class TorrSearch:
             _logger.debug(data.status_code)
             _logger.debug(data.headers)
             if data.status_code == 200:
-                return data.text
+                return self._parse_rutor(data.text)
         return None
 
     def _generate_rutor_links(self):
@@ -35,3 +36,27 @@ class TorrSearch:
             for proto in self._rutor['protocols']:
                 links.append(f"{proto}://{host}{self._rutor['search_string']}")
         return links
+
+    @staticmethod
+    def _parse_rutor(html_text):
+        tree = html.fromstring(html_text)
+        elements = tree.xpath('//table[@width]//tr')
+        results = list()
+        for e in elements:
+            data = e.xpath('./td//text()')
+            if len(data) == 7:
+                element = {
+                    "date": data[0],
+                    "name": data[2],
+                    "size": data[3]
+                }
+            elif len(data) == 8:
+                element = {
+                    "date": data[0],
+                    "name": data[2],
+                    "size": data[4]
+                }
+            else:
+                continue
+            results.append(element)
+        return results
