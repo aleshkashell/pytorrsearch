@@ -3,8 +3,8 @@ from distutils.core import setup
 name = 'torrsearch'
 version = '0.0.1'
 setup(
-  name=f'{name}',
-  packages=['pytorrsearch'],  # this must be the same as the name above
+  name='pytorrsearch',
+  packages=['torrsearch'],  # this must be the same as the name above
   version=f'{version}',
   description='Module for searching in popular Russian torrent trackers',
   author='Sheludchenkov Aleksey',
