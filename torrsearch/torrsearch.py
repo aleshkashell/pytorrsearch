@@ -16,6 +16,7 @@ class TorrSearch:
         self._rutor['protocols'] = ['http', 'https']
         self._rutor['host'] = ['rutor.is', 'rutor.info', '6tor.net']
         self._rutor['search_string'] = '/search/'
+        self._rutor['search_keyword'] = '/search/0/0/100/0/'
         self._rutor['search_words'] = ''
 
     def search_rutor(self, search_str):
@@ -30,11 +31,25 @@ class TorrSearch:
                 return self._parse_rutor(data.text)
         return None
 
-    def _generate_rutor_links(self):
+    def search_keywords_rutor(self, keywords):
+        for link in self._generate_rutor_links('search_keyword'):
+            try:
+                if type(keywords) is list:
+                    keywords = ' '.join(keywords)
+                data = self._session.get(f"{link}{keywords}", allow_redirects=False)
+            except requests.exceptions.ConnectionError:
+                continue
+            _logger.debug(data.status_code)
+            _logger.debug(data.headers)
+            if data.status_code == 200:
+                return self._parse_rutor(data.text)
+        return None
+
+    def _generate_rutor_links(self, method='search_string'):
         links = list()
         for host in self._rutor['host']:
             for proto in self._rutor['protocols']:
-                links.append(f"{proto}://{host}{self._rutor['search_string']}")
+                links.append(f"{proto}://{host}{self._rutor[method]}")
         return links
 
     @staticmethod
