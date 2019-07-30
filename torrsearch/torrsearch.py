@@ -44,17 +44,20 @@ class TorrSearch:
         results = list()
         for e in elements:
             data = e.xpath('./td//text()')
+            link = e.xpath('.//a/@href')
             if len(data) == 7:
                 element = {
                     "date": data[0],
                     "name": data[2],
-                    "size": data[3]
+                    "size": data[3],
+                    "link": link[2]
                 }
             elif len(data) == 8:
                 element = {
                     "date": data[0],
                     "name": data[2],
-                    "size": data[4]
+                    "size": data[4],
+                    "link": link[2]
                 }
             else:
                 continue
