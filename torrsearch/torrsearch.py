@@ -2,7 +2,7 @@ import requests
 import logging
 from lxml import html
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 _logger = logging.getLogger(__name__)
 
 
