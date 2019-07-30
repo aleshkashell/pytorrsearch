@@ -14,6 +14,6 @@ setup(
   keywords=['torrent', 'rutor', 'rutracker'],
   classifiers=[],
   install_requires=[
-          'requests',
+          'requests', 'lxml'
       ],
 )
