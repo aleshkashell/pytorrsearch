@@ -4,7 +4,7 @@ name = 'torrsearch'
 version = '0.0.1'
 setup(
   name=f'{name}',
-  packages=[f'{name}'],  # this must be the same as the name above
+  packages=['pytorrsearch'],  # this must be the same as the name above
   version=f'{version}',
   description='Module for searching in popular Russian torrent trackers',
   author='Sheludchenkov Aleksey',
