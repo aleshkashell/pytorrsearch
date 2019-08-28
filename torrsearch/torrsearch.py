@@ -45,6 +45,16 @@ class TorrSearch:
                 return self._parse_rutor(data.text)
         return None
 
+    def search_films(self, keywords):
+        data = self.search_keywords_rutor(keywords)
+        result = list()
+        for i in data:
+            if 'rip' in i['name'].lower() and ("itunes" in i['name'].lower() or "лицензия" in i['name'].lower()):
+                result.append(i)
+            elif "bdrip" in i['name'].lower() and "1080" in i:
+                result.append(i)
+        return result
+
     def _generate_rutor_links(self, method='search_string'):
         links = list()
         for host in self._rutor['host']:
