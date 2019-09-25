@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 name = 'torrsearch'
-version = '0.0.1'
+version = '0.0.2'
 setup(
   name='pytorrsearch',
   packages=['torrsearch'],  # this must be the same as the name above
