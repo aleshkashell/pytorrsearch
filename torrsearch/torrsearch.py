@@ -52,7 +52,9 @@ class TorrSearch:
             for i in data:
                 if 'rip' in i['name'].lower() and ("itunes" in i['name'].lower() or "лицензия" in i['name'].lower()):
                     result.append(i)
-                elif "bdrip" in i['name'].lower() and "1080" in i:
+                elif "bdrip" in i['name'].lower() or "bdremux" in i['name'].lower():
+                    result.append(i)
+                elif "web-dl" in i['name'].lower():
                     result.append(i)
         return result
 
