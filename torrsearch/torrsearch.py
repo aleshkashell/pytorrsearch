@@ -54,10 +54,9 @@ class TorrSearch:
                     result.append(i)
                 elif "bdrip" in i['name'].lower() or "bdremux" in i['name'].lower():
                     result.append(i)
-                elif "web-dl" in i['name'].lower():
+                elif "web-dl" in i['name'].lower() or "hdtvrip" in i['name'].lower() or "webrip" in i['name'].lower():
                     result.append(i)
         return result
-
 
     def _generate_rutor_links(self, method='search_string'):
         links = list()
